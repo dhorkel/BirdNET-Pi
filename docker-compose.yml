@@ -1,0 +1,32 @@
+services:
+  birdnet:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: birdnet-pi
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    environment:
+      - BIRDNET_CONFIG=/opt/birdnet/birdnet.conf
+      - TZ=${TZ:-UTC}
+      # - CADDY_PWD=yourpassword
+      # - ICE_PWD=birdnetpi
+    volumes:
+      - birdnet-data:/data
+      # Mount custom config (uncomment and edit):
+      # - ./my-birdnet.conf:/opt/birdnet/birdnet.conf:ro
+    # USB/ALSA microphone passthrough (Linux host only).
+    # Uncomment and set REC_CARD in birdnet.conf (e.g. REC_CARD=hw:1,0).
+    # Run `arecord -l` on the host to list available devices.
+    # devices:
+    #   - /dev/snd:/dev/snd
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  birdnet-data:

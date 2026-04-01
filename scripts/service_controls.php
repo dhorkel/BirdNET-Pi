@@ -13,7 +13,8 @@ function service_status($name) {
        echo "<span style='color:#fc6603'>(stalled - backlog of ".$filesinproc." files in ~/BirdSongs/StreamData/)</span>";
        return;
     }
-  } 
+  }
+  if (empty(trim(shell_exec('which systemctl 2>/dev/null')))) { return; }
   $op = shell_exec("sudo systemctl status ".$name." | grep Active");
   if (stripos($op, " active (running)") || stripos($op, " active (mounted)")) {
       echo "<span style='color:green'>(active)</span>";

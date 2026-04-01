@@ -1,0 +1,20 @@
+:80 {
+  root * /data/Extracted
+  file_server browse
+
+  handle /By_Date/* {
+    file_server browse
+  }
+  handle /Charts/* {
+    file_server browse
+  }
+
+  # Authentication block - will be dynamically replaced by entrypoint.sh
+  # if CADDY_PWD is set. Placeholder markers for sed replacement.
+  # BASICAUTH_START
+  # BASICAUTH_END
+
+  reverse_proxy /stream localhost:8000
+  php_fastcgi unix//run/php/php-fpm.sock
+  reverse_proxy /stats* localhost:8501
+}

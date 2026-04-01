@@ -1,0 +1,92 @@
+################################################################################
+#              BirdNET-Pi Docker Configuration (Example)                       #
+#                                                                              #
+# Copy this file and customize for your setup. Mount it into the container     #
+# or set BIRDNET_CONFIG env var to point to it.                                #
+################################################################################
+
+SITE_NAME="BirdNET-Pi Docker"
+
+#--------------------- Required: Latitude, and Longitude ----------------------#
+# Set these to your location (4 decimal places)
+
+LATITUDE=0.0000
+LONGITUDE=0.0000
+
+#--------------------------------- Model --------------------------------------#
+
+MODEL=BirdNET_GLOBAL_6K_V2.4_Model_FP16
+SF_THRESH=0.03
+DATA_MODEL_VERSION=1
+
+#---------------------  BirdWeather Station Information -----------------------#
+
+BIRDWEATHER_ID=
+
+#-----------------------  Apprise Notifications  ------------------------------#
+
+APPRISE_NOTIFICATION_TITLE="New BirdNET-Pi Detection"
+APPRISE_NOTIFY_EACH_DETECTION=0
+APPRISE_NOTIFY_NEW_SPECIES=0
+APPRISE_WEEKLY_REPORT=0
+APPRISE_NOTIFY_NEW_SPECIES_EACH_DAY=0
+APPRISE_MINIMUM_SECONDS_BETWEEN_NOTIFICATIONS_PER_SPECIES=0
+APPRISE_ONLY_NOTIFY_SPECIES_NAMES=""
+APPRISE_ONLY_NOTIFY_SPECIES_NAMES_2=""
+
+#---------------------  Image Provider Configuration -------------------------#
+
+IMAGE_PROVIDER=WIKIPEDIA
+
+#-------------------------------  Color scheme  --------------------------------#
+
+COLOR_SCHEME="light"
+
+#------------------------------  Disk Management  ------------------------------#
+
+FULL_DISK=purge
+PURGE_THRESHOLD=95
+MAX_FILES_SPECIES=0
+
+################################################################################
+#--------------------------------  Defaults  ----------------------------------#
+################################################################################
+
+BIRDNET_USER=birdnet
+
+RECS_DIR=/data
+PROCESSED=/data/Processed
+EXTRACTED=/data/Extracted
+
+OVERLAP=0.0
+CONFIDENCE=0.7
+SENSITIVITY=1.25
+PRIVACY_THRESHOLD=0
+RECORDING_LENGTH=15
+EXTRACTION_LENGTH=
+AUDIOFMT=mp3
+DATABASE_LANG=en
+CHANNELS=2
+RAW_SPECTROGRAM=0
+HEARTBEAT_URL=
+
+#----------------------------  RTSP Stream URL  -------------------------------#
+# Set this to use an RTSP stream as audio source (recommended for Docker)
+
+RTSP_STREAM=
+
+RTSP_STREAM_TO_LIVESTREAM="0"
+
+#----------------------------  Audio Device  ----------------------------------#
+# Leave as "default" for PulseAudio, or specify an ALSA device.
+# For Docker on Linux, you can pass through your host audio device.
+
+REC_CARD=default
+
+RARE_SPECIES_THRESHOLD=30
+LAST_RUN=
+THIS_RUN=
+IDFILE=/opt/birdnet/IdentifiedSoFar.txt
+LogLevel_BirdnetRecordingService="error"
+LogLevel_LiveAudioStreamService="error"
+LogLevel_SpectrogramViewerService="error"
