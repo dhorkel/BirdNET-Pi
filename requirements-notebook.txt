@@ -1,0 +1,9 @@
+pandas
+numpy
+plotly
+ipywidgets
+scikit-learn
+suntime
+python-dateutil
+IPython
+notebook
